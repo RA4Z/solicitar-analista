@@ -1,9 +1,11 @@
+import * as React from 'react';
 import { TextField } from '@mui/material'
 import { useState } from 'react'
 import styles from './Cadastrar.module.scss'
 import Button from 'components/Button'
 import { useNavigate } from 'react-router-dom'
-import { salvarSolicitacao } from 'services/firestore'
+import Snackbar from '@mui/material/Snackbar';
+import { salvarSolicitacao } from 'services/firestore';
 
 export default function Cadastrar() {
     const navigate = useNavigate()
@@ -20,19 +22,29 @@ export default function Cadastrar() {
         observacoes: []
     })
 
+    const [statusToast, setStatusToast] = useState({
+        visivel: false,
+        message: ''
+    })
+
+    function timeout(delay: number) {
+        return new Promise(res => setTimeout(res, delay));
+    }
+
     async function realizarCadastro() {
         if (dados.projeto === '' || dados.analista === '' || dados.descricao === '' || dados.dataPrevista === '' || dados.ganhoPrevisto === '' || dados.solicitante === '') {
-            alert('Existem dados em branco!')
+            setStatusToast({ visivel: true, message: 'Existem dados em branco' })
             setErroSubmit(true)
-        } else {
-            const response = await salvarSolicitacao(dados)
-            if (response === 'erro') {
-                alert('Ocorreu algum erro na hora de gravar a solicitação, solicite suporte!')
-                return
-            }
-            alert('Solicitação cadastrada com sucesso!')
-            navigate('/')
+            return
         }
+        const response = await salvarSolicitacao(dados)
+        if (response === 'erro') {
+            setStatusToast({ visivel: true, message: 'Ocorreu algum erro na hora de gravar a solicitação, solicite suporte' })
+            return
+        }
+        setStatusToast({ visivel: true, message: 'O trabalho foi solicitado com sucesso!' })
+        await timeout(2000);
+        navigate('/')
     }
 
     return (
@@ -86,6 +98,12 @@ export default function Cadastrar() {
                 label="Solicitado por" />
 
             <Button texto='Cadastrar Projeto' cor='verde' onClick={() => realizarCadastro()} />
+            <Snackbar
+                open={statusToast.visivel}
+                onClose={() => setStatusToast({ ...statusToast, visivel: false })}
+                autoHideDuration={3000}
+                message={statusToast.message}
+            />
         </div>
     )
 }
