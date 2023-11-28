@@ -1,9 +1,9 @@
 import styles from './Button.module.scss'
-import { useState } from 'react'
 
 interface Props {
     texto: string,
-    cor: string
+    cor: string,
+    onClick: (_:any) => any
 }
 
 export default function Button(props: Props) {
@@ -33,7 +33,7 @@ export default function Button(props: Props) {
 
     }
     return (
-        <div className={styles.container} style={{ background: color }}>
+        <div className={styles.container} style={{ background: color }} onClick={props.onClick}>
             {props.texto}
         </div>
     )
