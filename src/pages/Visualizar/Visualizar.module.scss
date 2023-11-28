@@ -1,7 +1,73 @@
 @import "styles/variaveis";
 @import "styles/breakpoints";
 
+.input {
+    background-color: white;
+    width: calc(100px + 50vmin);
+    border-radius: 10px;
+}
+
 .container {
-    color: white;
-    min-height: 100vh;
+    padding: 50px;
+}
+
+.pesquisas {
+    height: auto;
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 30px;
+
+    &__left {
+        display: flex;
+        gap: 30px;
+        flex-direction: column;
+    }
+
+    &__right {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 500px;
+        text-align: center;
+        gap: 20px;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        font-size: calc(10px + 1vmin);
+        background-color: #D9D9D9;
+    }
+}
+
+.submit {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.check {
+    &__concluido {
+        color: #369227;
+        font-weight: bold;
+    }
+
+    &__andamento {
+        color: #5590EA;
+        font-weight: bold;
+    }
+
+    &__nao_iniciado {
+        color: #6C6B6B;
+        font-weight: bold;
+    }
+
+    &__parado {
+        color: #BAB310;
+        font-weight: bold;
+    }
+
+    &__cancelado {
+        color: #9D1010;
+        font-weight: bold;
+    }
 }

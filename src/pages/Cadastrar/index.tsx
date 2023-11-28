@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { TextField } from '@mui/material'
 import { useState } from 'react'
 import styles from './Cadastrar.module.scss'
