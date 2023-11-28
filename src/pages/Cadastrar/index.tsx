@@ -18,6 +18,7 @@ export default function Cadastrar() {
         solicitante: '',
         dataFimReal: '',
         ganhoReal: '',
+        status: 'Não iniciado',
         observacoes: []
     })
 

@@ -1,0 +1,26 @@
+@import "styles/variaveis";
+@import "styles/breakpoints";
+
+.container {
+    display: flex;
+    background-color: #D9D9D9;
+    width: fit-content;
+    gap: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px #191919;
+    cursor: pointer;
+    transition: .8s;
+
+    img {
+        height: 106px;
+    }
+
+    &__right {
+        height: auto;
+    }
+
+    &:hover {
+        box-shadow: 5px 5px 7px #ffffff;
+    }
+}

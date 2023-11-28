@@ -1,5 +1,5 @@
 import { db } from 'config/firebase';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, onSnapshot, query } from 'firebase/firestore';
 
 export async function salvarSolicitacao(data: any) {
     try {
@@ -9,5 +9,16 @@ export async function salvarSolicitacao(data: any) {
         console.log('Erro add service:', error)
         return 'erro'
     }
+}
+
+export async function visualizarSolicitacoes(setSolicitacoes: any) {
+    const ref = query(collection(db, "trabalhos"))
+    onSnapshot(ref, (querySnapshot) => {
+        const posts: any[] = []
+        querySnapshot.forEach((doc) => {
+            posts.push({ id: doc.id, ...doc.data() })
+        })
+        setSolicitacoes(posts)
+    })
 }
 
