@@ -64,5 +64,24 @@
     opacity: 0.9;
     padding: 20px;
     z-index: 1;
-    background-color: $concluido;
+
+    &--concluído {
+        background-color: $concluido;
+    }
+
+    &--não_iniciado {
+        background-color: $nao_iniciado;
+    }
+
+    &--em_andamento {
+        background-color: $em_andamento;
+    }
+
+    &--parado {
+        background-color: $parado;
+    }
+
+    &--cancelado {
+        background-color: $cancelado;
+    }
 }

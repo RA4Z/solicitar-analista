@@ -1,13 +1,22 @@
 import Button from 'components/Button'
 import styles from './Projeto.module.scss'
+import { useNavigate } from 'react-router-dom'
 import VoltarIMG from 'assets/imagem_voltar.png'
+import classNames from 'classnames';
 
 export default function Projeto() {
+    const status = "Não Iniciado"
+    const navigate = useNavigate()
     return (
         <div className={styles.container}>
-            <div className={styles.status_projeto}>Projeto Concluído</div>
+            <div className={classNames(
+                styles.status_projeto,
+                styles[`status_projeto--${status.replace(' ', '_').toLowerCase()}`]
+            )}>
+
+                Projeto {status}</div>
             <div className={styles.container__header}>
-                <img src={VoltarIMG} alt='Voltar' />
+                <img src={VoltarIMG} alt='Voltar' onClick={() => navigate(-1)} />
                 <h2>Título do Projeto - Nome do Analista</h2>
                 <div />
             </div>
