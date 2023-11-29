@@ -22,7 +22,7 @@ export default function Projeto() {
         observacoes: [{ data: '', ocorrido: '' }],
         projeto: '',
         solicitante: '',
-        status: 'Não iniciado'
+        status: ''
     })
 
     const visible = (childdata: boolean) => {
