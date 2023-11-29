@@ -21,7 +21,7 @@ export default function Cadastrar() {
         status: 'Não iniciado',
         observacoes: []
     })
-
+    console.log('entrou')
     const [statusToast, setStatusToast] = useState({
         visivel: false,
         message: ''
