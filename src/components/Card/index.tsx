@@ -1,5 +1,6 @@
 import styles from './Card.module.scss'
 import UserIMG from 'assets/imagem_usuario.png'
+import classNames from 'classnames'
 
 interface Props {
     nome: string,
@@ -16,7 +17,10 @@ export default function Card(props: Props) {
             <div className={styles.container__right}>
                 <p>{props.nome}</p>
                 <p>{props.projeto}</p>
-                <p>{props.status}</p>
+                <p className={classNames(
+                styles.status,
+                styles[`status--${props.status.replace(' ', '_').toLowerCase()}`]
+                )}>{props.status}</p>
             </div>
         </div>
     )

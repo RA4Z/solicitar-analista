@@ -32,3 +32,27 @@
     }
     
 }
+
+.status {
+    font-weight: bold;
+
+    &--concluído {
+        color: $concluido;
+    }
+
+    &--não_iniciado {
+        color: $nao_iniciado;
+    }
+
+    &--em_andamento {
+        color: $em_andamento;
+    }
+
+    &--parado {
+        color: $parado;
+    }
+
+    &--cancelado {
+        color: $cancelado;
+    }
+}

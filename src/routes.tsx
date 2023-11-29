@@ -5,6 +5,7 @@ import Header from "components/Header";
 import Footer from "components/Footer";
 import Cadastrar from "pages/Cadastrar";
 import Projeto from "pages/Projeto";
+import Atualizar from "pages/Atualizar";
 
 export default function AppRouter() {
     return (
@@ -14,6 +15,7 @@ export default function AppRouter() {
                     <Route index element={<Visualizar />} />
                     <Route path='/Cadastro' element={<Cadastrar />} />
                     <Route path='/Projeto/:id' element={<Projeto />} />
+                    <Route path='/Atualizar/:id' element={<Atualizar />} />
                 </Route>
             </Routes>
             <Footer />
