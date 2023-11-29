@@ -154,7 +154,7 @@ export default function Atualizar() {
                     value={dados.ganhoReal}
                     error={erroSubmit}
                     onChange={e => setDados({ ...dados, ganhoReal: e.target.value })}
-                    label="Ganho Previsto" />
+                    label="Ganho Real" />
             </div>
 
             <TextField id="cadastrar-solicitante"

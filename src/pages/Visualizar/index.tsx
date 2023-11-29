@@ -10,6 +10,7 @@ export default function Visualizar() {
     const [trabalhos, setTrabalhos] = useState([{ id: '', analista: '', projeto: '', status: '' }])
     const navigate = useNavigate()
     useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         visualizarSolicitacoes(setTrabalhos)
     }, [])
 

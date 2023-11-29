@@ -30,6 +30,7 @@ export default function Projeto() {
     }
 
     if (dados.analista === '' && acesso === false) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         infoProjeto(id, setDados)
         setAcesso(true)
     }
