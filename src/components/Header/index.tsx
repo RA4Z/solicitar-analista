@@ -1,16 +1,17 @@
 import styles from './Header.module.scss'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Outlet } from 'react-router-dom';
 import Weg from 'assets/weg-logo.png'
 import Button from 'components/Button';
 
 export default function Header() {
+    const { id } = useParams()
     const navigate = useNavigate()
     const [show, setShow] = useState({
         cadastrar: false, atualizar: false
     })
-
+    
     //cadastrar
     if (window.location.pathname === '/' && show.cadastrar === false) {
         setShow({ ...show, cadastrar: true, atualizar: false })
@@ -35,7 +36,7 @@ export default function Header() {
             <div className={styles.container}>
                 <img src={Weg} alt='Logo da Weg' onClick={() => navigate('/')} />
                 {show.cadastrar && <Button texto='Cadastrar Projeto' cor='azul' onClick={() => navigate('/Cadastro')} />}
-                {show.atualizar && <Button texto='Atualizar Informações' cor='azul' onClick={() => navigate('/Atualizar/1')} />}
+                {show.atualizar && <Button texto='Atualizar Informações' cor='azul' onClick={() => navigate(`/Atualizar/${id}`)} />}
             </div>
             <Outlet />
         </>

@@ -30,8 +30,8 @@ export default function Visualizar() {
                     </div>
                     <div className={styles.pesquisas__right}>
                         <FormControlLabel control={<Checkbox />} label={<div className={styles.check__concluido}>Concluído</div>} />
-                        <FormControlLabel control={<Checkbox />} label={<div className={styles.check__andamento}>Em andamento</div>} />
-                        <FormControlLabel control={<Checkbox />} label={<div className={styles.check__nao_iniciado}>Não iniciado</div>} />
+                        <FormControlLabel control={<Checkbox />} label={<div className={styles.check__andamento}>Em Andamento</div>} />
+                        <FormControlLabel control={<Checkbox />} label={<div className={styles.check__nao_iniciado}>Não Iniciado</div>} />
                         <FormControlLabel control={<Checkbox />} label={<div className={styles.check__parado}>Parado</div>} />
                         <FormControlLabel control={<Checkbox />} label={<div className={styles.check__cancelado}>Cancelado</div>} />
                     </div>

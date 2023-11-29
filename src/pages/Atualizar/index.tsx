@@ -2,31 +2,44 @@ import { TextField, FormControl, MenuItem, InputLabel, Select } from '@mui/mater
 import { useState } from 'react'
 import styles from './Atualizar.module.scss'
 import Button from 'components/Button'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Snackbar from '@mui/material/Snackbar';
-import { salvarSolicitacao } from 'services/firestore';
+import { atualizarProjeto, deletarProjeto, infoProjeto } from 'services/firestore';
 import classNames from 'classnames'
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 export default function Atualizar() {
+    const { id } = useParams()
     const navigate = useNavigate()
+    const [open, setOpen] = useState(false);
+    const [acesso, setAcesso] = useState(false)
     const [erroSubmit, setErroSubmit] = useState(false)
     const [dados, setDados] = useState({
-        projeto: '',
         analista: '',
-        descricao: '',
-        dataPrevista: '',
-        ganhoPrevisto: '',
-        solicitante: '',
         dataFimReal: '',
+        dataPrevista: '',
+        descricao: '',
+        ganhoPrevisto: '',
         ganhoReal: '',
-        status: 'Não Iniciado',
-        observacoes: []
+        observacoes: [{ data: '', ocorrido: '' }],
+        projeto: '',
+        solicitante: '',
+        status: 'Não Iniciado'
     })
-
+    const [obs, setObs] = useState({ data: '', ocorrido: '' })
     const [statusToast, setStatusToast] = useState({
         visivel: false,
         message: ''
     })
+
+    if (dados.analista === '' && acesso === false) {
+        infoProjeto(id, setDados)
+        setAcesso(true)
+    }
 
     function timeout(delay: number) {
         return new Promise(res => setTimeout(res, delay));
@@ -38,20 +51,58 @@ export default function Atualizar() {
             setErroSubmit(true)
             return
         }
-        const response = await salvarSolicitacao(dados)
-        if (response === 'erro') {
-            setStatusToast({ visivel: true, message: 'Ocorreu algum erro na hora de gravar a solicitação, solicite suporte' })
+        const response = await atualizarProjeto(id, dados)
+        if (response === 'error') {
+            setStatusToast({ visivel: true, message: 'Ocorreu algum erro na hora de gravar a solicitação, solicite suporte!' })
             return
         }
-        setStatusToast({ visivel: true, message: 'O trabalho foi solicitado com sucesso!' })
+        setStatusToast({ visivel: true, message: 'O trabalho foi atualizado com sucesso!' })
+        await timeout(2000);
+        navigate(-1)
+    }
+
+    function adicionarObs() {
+        if (obs.data && obs.ocorrido) {
+            dados.observacoes.push({ data: obs.data, ocorrido: obs.ocorrido })
+            setObs({ data: '', ocorrido: '' })
+            setStatusToast({ visivel: true, message: 'Observação Adicionada!' })
+        }
+    }
+
+    async function apagarProjeto() {
+        const response = await deletarProjeto(id)
+        if (response === 'error') {
+            setStatusToast({ visivel: true, message: 'Ocorreu algum erro na hora de deletar o projeto, solicite suporte!' })
+            return
+        }
+        setOpen(false)
+        setStatusToast({ visivel: true, message: 'Projeto deletado com sucesso!' })
         await timeout(2000);
         navigate('/')
     }
 
     return (
         <div className={styles.container}>
-            <div className={styles.linhaStart}>
+            <Dialog
+                open={open}
+                onClose={() => setOpen(false)}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description">
+                <DialogTitle id="alert-dialog-title">
+                    {"Tem certeza de que deseja excluir esse projeto?"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Essa ação é irreversível, o projeto "{dados.projeto}" do analista {dados.analista} será deletado para sempre!
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button texto='Cancelar' cor='cinza' onClick={() => setOpen(false)} />
+                    <Button texto='Deletar Projeto' cor='vermelho' onClick={() => apagarProjeto()} />
+                </DialogActions>
+            </Dialog>
 
+            <div className={styles.linhaStart}>
                 <TextField id="cadastrar-titulo"
                     className={styles.input}
                     value={dados.projeto}
@@ -90,6 +141,7 @@ export default function Atualizar() {
                     onChange={e => setDados({ ...dados, ganhoPrevisto: e.target.value })}
                     label="Ganho Previsto" />
             </div>
+
             <div className={styles.previstos}>
                 <TextField id="cadastrar-data-fim"
                     className={styles.input__pequeno}
@@ -97,7 +149,6 @@ export default function Atualizar() {
                     error={erroSubmit}
                     onChange={e => setDados({ ...dados, dataFimReal: e.target.value })}
                     label="Finalizado em" />
-
                 <TextField id="cadastrar-ganho-real"
                     className={styles.input__pequeno}
                     value={dados.ganhoReal}
@@ -105,6 +156,7 @@ export default function Atualizar() {
                     onChange={e => setDados({ ...dados, ganhoReal: e.target.value })}
                     label="Ganho Previsto" />
             </div>
+
             <TextField id="cadastrar-solicitante"
                 className={styles.input}
                 error={erroSubmit}
@@ -133,33 +185,32 @@ export default function Atualizar() {
             <div className={styles.obs}>
                 <TextField id="atualizar-data-obs"
                     className={styles.input__pequeno}
-                    value={dados.ganhoReal}
+                    value={obs.data}
                     error={erroSubmit}
-                    onChange={e => setDados({ ...dados, ganhoReal: e.target.value })}
+                    onChange={e => setObs({ ...obs, data: e.target.value })}
                     label="Data de observação" />
 
                 <TextField id="atualizar-text-obs"
                     rows={4}
                     multiline
                     className={styles.input__description}
-                    value={dados.descricao}
+                    value={obs.ocorrido}
                     error={erroSubmit}
-                    onChange={e => setDados({ ...dados, descricao: e.target.value })}
+                    onChange={e => setObs({ ...obs, ocorrido: e.target.value })}
                     label="Texto da Observação" />
-                <Button texto='Adicionar Observação' cor='azul' onClick={() => { }} />
+                <Button texto='Adicionar Observação' cor='azul' onClick={() => adicionarObs()} />
             </div>
 
             <div className={styles.buttons}>
                 <Button texto='Cancelar' cor='cinza' onClick={() => navigate(-1)} />
                 <Button texto='Salvar Alterações' cor='verde' onClick={() => realizarCadastro()} />
-                <Button texto='Deletar Projeto' cor='vermelho' onClick={() => { }} />
+                <Button texto='Deletar Projeto' cor='vermelho' onClick={() => setOpen(true)} />
             </div>
             <Snackbar
                 open={statusToast.visivel}
                 onClose={() => setStatusToast({ ...statusToast, visivel: false })}
                 autoHideDuration={3000}
-                message={statusToast.message}
-            />
+                message={statusToast.message} />
         </div>
     )
 }
