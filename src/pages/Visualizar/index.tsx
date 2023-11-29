@@ -1,13 +1,14 @@
 import Button from 'components/Button'
 import styles from './Visualizar.module.scss'
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { TextField, Checkbox, FormControlLabel, Divider } from '@mui/material'
 import Card from 'components/Card'
 import { visualizarSolicitacoes } from 'services/firestore'
 
 export default function Visualizar() {
     const [trabalhos, setTrabalhos] = useState([{ id: '', analista: '', projeto: '', status: '' }])
-
+    const navigate = useNavigate()
     useEffect(() => {
         visualizarSolicitacoes(setTrabalhos)
     }, [])
@@ -43,7 +44,11 @@ export default function Visualizar() {
             <div className={styles.cards}>
 
                 {trabalhos.map(trabalho => (
-                    <Card key={trabalho.id} nome={trabalho.analista} status={trabalho.status} projeto={trabalho.projeto} />
+                    <Card key={trabalho.id}
+                        nome={trabalho.analista}
+                        status={trabalho.status}
+                        projeto={trabalho.projeto}
+                        onClick={() => navigate(`/Projeto/${trabalho.id}`)} />
                 ))}
             </div>
         </div>

@@ -1,5 +1,5 @@
 import { db } from 'config/firebase';
-import { addDoc, collection, onSnapshot, query } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, onSnapshot, query } from 'firebase/firestore';
 
 export async function salvarSolicitacao(data: any) {
     try {
@@ -22,3 +22,14 @@ export async function visualizarSolicitacoes(setSolicitacoes: any) {
     })
 }
 
+export async function infoProjeto(projetoID: any, setProjeto: any) {
+    try {
+        const ref = (await getDoc(doc(db, 'trabalhos', projetoID))).data()
+        setProjeto(ref)
+        return 'ok'
+    }
+    catch (error) {
+        console.log(error)
+        return 'error'
+    }
+}

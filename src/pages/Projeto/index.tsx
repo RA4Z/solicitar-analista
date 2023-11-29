@@ -5,37 +5,45 @@ import { useNavigate, useParams } from 'react-router-dom'
 import VoltarIMG from 'assets/imagem_voltar.png'
 import classNames from 'classnames';
 import Observacoes from './Observacoes'
+import { infoProjeto } from 'services/firestore'
 
 export default function Projeto() {
     const { id } = useParams()
     const navigate = useNavigate()
     const [obsVisible, setObsVisible] = useState(false)
+    const [acesso, setAcesso] = useState(false)
     const [dados, setDados] = useState({
-        analista: 'Nome do Analista',
-        dataFimReal: '29/11/2023',
-        dataPrevista: '31/01/2024',
-        descricao: 'Descrição sobre o projeto, diversas informações sobre o mesmo, blábláblá Descrição sobre o projeto, diversas informações sobre o mesmo, blábláblá Descrição sobre o projeto, diversas informações sobre o mesmo, blábláblá Descrição sobre o projeto, diversas informações sobre o mesmo, blábláblá Descrição sobre o projeto, diversas informações sobre o mesmo, blábláblá Descrição sobre o projeto, diversas informações sobre o mesmo, blábláblá Descrição sobre o projeto, diversas informações sobre o mesmo, blábláblá Descrição sobre o projeto, diversas informações sobre o mesmo, blábláblá Descrição sobre o projeto, diversas informações sobre o mesmo, blábláblá',
-        ganhoPrevisto: '300R$',
-        ganhoReal: '3.000.000R$',
-        observacoes: [{ data: '22/11/2023', ocorrido: 'Foi feito tal modificação em tal coisa' }],
-        projeto: 'Título do Projeto',
-        solicitante: 'Nome Solicitante',
-        status: 'Não Iniciado'
+        analista: '',
+        dataFimReal: '',
+        dataPrevista: '',
+        descricao: '',
+        ganhoPrevisto: '',
+        ganhoReal: '',
+        observacoes: [{ data: '', ocorrido: '' }],
+        projeto: '',
+        solicitante: '',
+        status: 'Não iniciado'
     })
+
     const visible = (childdata: boolean) => {
         setObsVisible(childdata)
     }
+
+    if (dados.analista === '' && acesso === false) {
+        infoProjeto(id, setDados)
+        setAcesso(true)
+    }
+
     return (
         <div className={styles.container}>
             {obsVisible && <div className={styles.container__obs}>
                 <Observacoes observacoes={dados.observacoes} visible={visible} />
             </div>}
-            <div className={classNames(
+            {dados.status && <div className={classNames(
                 styles.status_projeto,
                 styles[`status_projeto--${dados.status.replace(' ', '_').toLowerCase()}`]
             )}>
-
-                Projeto {dados.status}</div>
+                Projeto {dados.status}</div>}
             <div className={styles.container__header}>
                 <img src={VoltarIMG} alt='Voltar' onClick={() => navigate(-1)} />
                 <h2>{dados.projeto} - {dados.analista}</h2>
