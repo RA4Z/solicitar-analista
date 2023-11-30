@@ -5,9 +5,22 @@ import { useNavigate } from 'react-router-dom'
 import { TextField, Checkbox, FormControlLabel, Divider } from '@mui/material'
 import Card from 'components/Card'
 import { visualizarSolicitacoes } from 'services/firestore'
+import Lista from 'components/Lista'
 
 export default function Visualizar() {
-    const [trabalhos, setTrabalhos] = useState([{ id: '', analista: '', projeto: '', status: '' }])
+    const [cards, setCards] = useState(false)
+    const [trabalhos, setTrabalhos] = useState([{
+        id: '',
+        analista: '',
+        projeto: '',
+        status: '',
+        solicitante: '',
+        dataPrevista: '',
+        dataFimReal: '',
+        ganhoPrevisto: '',
+        ganhoReal: ''
+    }])
+
     const navigate = useNavigate()
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -42,8 +55,7 @@ export default function Visualizar() {
                 </div>
                 <Divider style={{ background: 'white', width: '100%', marginBottom: 25, marginTop: 20 }} />
             </form>
-            <div className={styles.cards}>
-
+            {cards ? <div className={styles.cards}>
                 {trabalhos.map(trabalho => (
                     <Card key={trabalho.id}
                         nome={trabalho.analista}
@@ -51,7 +63,12 @@ export default function Visualizar() {
                         projeto={trabalho.projeto}
                         onClick={() => navigate(`/Projeto/${trabalho.id}`)} />
                 ))}
-            </div>
-        </div>
+            </div> :
+                <>
+                    {trabalhos.map(trabalho => (
+                        <Lista {...trabalho} onClick={() => navigate(`/Projeto/${trabalho.id}`)} />
+                    ))}
+                </>}
+        </div >
     )
 }

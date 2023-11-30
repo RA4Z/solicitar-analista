@@ -2,5 +2,41 @@
 @import "styles/breakpoints";
 
 .container {
-    
+    text-align: center;
+    color: white;
+    list-style-type: none;
+
+    &__linha {
+        display: flex;
+        justify-content: space-between;
+        margin: 3px;
+    }
+
+    li {
+        min-width: 33%;
+    }
+}
+
+.status {
+    font-weight: bold;
+
+    &--concluído {
+        color: $concluido;
+    }
+
+    &--não_iniciado {
+        color: $nao_iniciado;
+    }
+
+    &--em_andamento {
+        color: $em_andamento;
+    }
+
+    &--parado {
+        color: $parado;
+    }
+
+    &--cancelado {
+        color: $cancelado;
+    }
 }
