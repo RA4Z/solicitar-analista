@@ -7,8 +7,7 @@ import Card from 'components/Card'
 import { visualizarSolicitacoes } from 'services/firestore'
 import Lista from 'components/Lista'
 
-export default function Visualizar() {
-    const [cards, setCards] = useState(false)
+export default function Visualizar({ view }: any) {
     const [trabalhos, setTrabalhos] = useState([{
         id: '',
         analista: '',
@@ -55,7 +54,7 @@ export default function Visualizar() {
                 </div>
                 <Divider style={{ background: 'white', width: '100%', marginBottom: 25, marginTop: 20 }} />
             </form>
-            {cards ? <div className={styles.cards}>
+            {view === 'cards' ? <div className={styles.cards}>
                 {trabalhos.map(trabalho => (
                     <Card key={trabalho.id}
                         nome={trabalho.analista}
