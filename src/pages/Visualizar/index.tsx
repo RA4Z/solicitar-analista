@@ -44,7 +44,24 @@ export default function Visualizar({ view }: any) {
             const regex = new RegExp(filtros.analista, 'i');
             return regex.test(title);
         }
-        const novaLista = backupFiltro.filter(item => testaProjeto(item.projeto) && testaAnalista(item.analista))
+        function testaStatus(lista: any, novaLista: typeof trabalhos) {
+            let list = novaLista
+            if (lista.includes('Concluído')) list = novaLista.filter(item => item.status === 'Concluído')
+            if (lista.includes('Em Andamento')) list = novaLista.filter(item => item.status === 'Em Andamento')
+            if (lista.includes('Parado')) list = novaLista.filter(item => item.status === 'Parado')
+            if (lista.includes('Cancelado')) list = novaLista.filter(item => item.status === 'Cancelado')
+            if (lista.includes('Não Iniciado')) list = novaLista.filter(item => item.status === 'Não Iniciado')
+            return list
+        }
+        let lista = []
+        if (filtroStatus.concluido) lista.push('Concluído')
+        if (filtroStatus.andamento) lista.push('Em Andamento')
+        if (filtroStatus.parado) lista.push('Parado')
+        if (filtroStatus.cancelado) lista.push('Cancelado')
+        if (filtroStatus.nao_iniciado) lista.push('Não Iniciado')
+        console.log(lista)
+        let novaLista = backupFiltro.filter(item => testaProjeto(item.projeto) && testaAnalista(item.analista))
+        novaLista = testaStatus(lista, novaLista)
         setTrabalhos(novaLista)
     }, [filtros, filtroStatus, backupFiltro])
 
