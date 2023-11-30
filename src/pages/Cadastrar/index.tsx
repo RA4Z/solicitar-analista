@@ -5,6 +5,10 @@ import Button from 'components/Button'
 import { useNavigate } from 'react-router-dom'
 import Snackbar from '@mui/material/Snackbar';
 import { salvarSolicitacao } from 'services/firestore';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import dayjs from 'dayjs'
 
 export default function Cadastrar() {
     const navigate = useNavigate()
@@ -21,7 +25,7 @@ export default function Cadastrar() {
         status: 'Não Iniciado',
         observacoes: []
     })
-    
+
     const [statusToast, setStatusToast] = useState({
         visivel: false,
         message: ''
@@ -76,12 +80,10 @@ export default function Cadastrar() {
                 label="Descrição do projeto" />
 
             <div className={styles.previstos}>
-                <TextField id="cadastrar-data"
-                    className={styles.input__pequeno}
-                    value={dados.dataPrevista}
-                    error={erroSubmit}
-                    onChange={e => setDados({ ...dados, dataPrevista: e.target.value })}
-                    label="Data Prevista" />
+
+                <LocalizationProvider dateAdapter={AdapterDayjs} >
+                    <DatePicker label='Data Prevista' value={dados.dataPrevista} onChange={e => setDados({ ...dados, dataPrevista: dayjs(e).toString() })} className={styles.input__pequeno} />
+                </LocalizationProvider>
 
                 <TextField id="cadastrar-ganho"
                     className={styles.input__pequeno}
