@@ -28,6 +28,7 @@
 
     li {
         list-style-type: none;
+        text-align: start;
     }
 
     @media(max-width:$tablet) {
