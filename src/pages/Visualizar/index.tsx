@@ -46,12 +46,9 @@ export default function Visualizar({ view }: any) {
         }
         function testaStatus(lista: any, novaLista: typeof trabalhos) {
             let list = novaLista
-            if (lista.includes('Concluído')) list = novaLista.filter(item => item.status === 'Concluído')
-            if (lista.includes('Em Andamento')) list = novaLista.filter(item => item.status === 'Em Andamento')
-            if (lista.includes('Parado')) list = novaLista.filter(item => item.status === 'Parado')
-            if (lista.includes('Cancelado')) list = novaLista.filter(item => item.status === 'Cancelado')
-            if (lista.includes('Não Iniciado')) list = novaLista.filter(item => item.status === 'Não Iniciado')
+            if (lista.length > 0) list = novaLista.filter(item => lista.includes(item.status))
             return list
+            
         }
         let lista = []
         if (filtroStatus.concluido) lista.push('Concluído')
