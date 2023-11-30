@@ -12,6 +12,11 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Observacoes from './Observacoes'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import dayjs from 'dayjs'
+
 
 export default function Atualizar() {
     const { id } = useParams()
@@ -86,7 +91,6 @@ export default function Atualizar() {
     const visible = (childdata: boolean) => {
         setObsVisible(childdata)
     }
-
     return (
         <div className={styles.container}>
             {obsVisible && <div className={styles.container__obs}>
@@ -136,6 +140,14 @@ export default function Atualizar() {
                 label="Descrição do projeto" />
 
             <div className={styles.previstos}>
+                <LocalizationProvider dateAdapter={AdapterDayjs} >
+                    <DatePicker label='Data Prevista'
+                        format='DD/MM/YYYY'
+                        value={dados.dataPrevista}
+                        onChange={e => setDados({ ...dados, dataPrevista: (dayjs(e).format('DD/MM/YYYY').toString())})}
+                        className={styles.input__pequeno} />
+                </LocalizationProvider>
+
                 <TextField id="cadastrar-data"
                     className={styles.input__pequeno}
                     value={dados.dataPrevista}
