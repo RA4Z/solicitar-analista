@@ -11,7 +11,7 @@ export async function salvarSolicitacao(data: any) {
     }
 }
 
-export async function visualizarSolicitacoes(setSolicitacoes: any) {
+export async function visualizarSolicitacoes(setSolicitacoes: any, setBackup?: any) {
     const ref = query(collection(db, "trabalhos"))
     onSnapshot(ref, (querySnapshot) => {
         const posts: any[] = []
@@ -19,6 +19,7 @@ export async function visualizarSolicitacoes(setSolicitacoes: any) {
             posts.push({ id: doc.id, ...doc.data() })
         })
         setSolicitacoes(posts)
+        if (setBackup) setBackup(posts)
     })
 }
 

@@ -35,7 +35,6 @@ export default function Header({ formato }: any) {
     function mudar(tipo: string) {
         formato(tipo)
         setView(tipo)
-        console.log(tipo)
     }
 
     return (

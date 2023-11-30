@@ -1,4 +1,3 @@
-import Button from 'components/Button'
 import styles from './Visualizar.module.scss'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -8,6 +7,10 @@ import { visualizarSolicitacoes } from 'services/firestore'
 import Lista from 'components/Lista'
 
 export default function Visualizar({ view }: any) {
+    const [filtros, setFiltros] = useState({
+        projeto: '', analista: ''
+    })
+    const [filtroStatus, setFiltroStatus] = useState({ concluido: false, andamento: false, nao_iniciado: false, parado: false, cancelado: false })
     const [trabalhos, setTrabalhos] = useState([{
         id: '',
         analista: '',
@@ -20,38 +23,58 @@ export default function Visualizar({ view }: any) {
         ganhoReal: ''
     }])
 
+    const [backupFiltro, setBackupFiltro] = useState(trabalhos)
+
     const navigate = useNavigate()
+
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        visualizarSolicitacoes(setTrabalhos)
+        async function buscarDados() {
+            await visualizarSolicitacoes(setTrabalhos, setBackupFiltro)
+        }
+        buscarDados()
     }, [])
 
-    async function realizarFiltro() {
-        console.log('Dados filtrados')
-    }
+    useEffect(() => {
+        function testaProjeto(title: string) {
+            const regex = new RegExp(filtros.projeto, 'i');
+            return regex.test(title);
+        }
+        function testaAnalista(title: string) {
+            const regex = new RegExp(filtros.analista, 'i');
+            return regex.test(title);
+        }
+        const novaLista = backupFiltro.filter(item => testaProjeto(item.projeto) && testaAnalista(item.analista))
+        setTrabalhos(novaLista)
+    }, [filtros, filtroStatus, backupFiltro])
+
     return (
         <div className={styles.container}>
             <form>
                 <div className={styles.pesquisas}>
                     <div className={styles.pesquisas__left}>
-                        <TextField id="cadastrar-titulo"
+                        <TextField id="cadastrar-projeto"
                             className={styles.input}
+                            value={filtros.projeto}
+                            onChange={e => setFiltros({ ...filtros, projeto: e.target.value })}
                             label="Filtrar por Título do Projeto" />
-                        <TextField id="cadastrar-titulo"
+                        <TextField id="cadastrar-analista"
                             className={styles.input}
+                            value={filtros.analista}
+                            onChange={e => setFiltros({ ...filtros, analista: e.target.value })}
                             label="Filtrar por Nome de Analista" />
                     </div>
                     <div className={styles.pesquisas__right}>
-                        <FormControlLabel control={<Checkbox />} label={<div className={styles.check__concluido}>Concluído</div>} />
-                        <FormControlLabel control={<Checkbox />} label={<div className={styles.check__andamento}>Em Andamento</div>} />
-                        <FormControlLabel control={<Checkbox />} label={<div className={styles.check__nao_iniciado}>Não Iniciado</div>} />
-                        <FormControlLabel control={<Checkbox />} label={<div className={styles.check__parado}>Parado</div>} />
-                        <FormControlLabel control={<Checkbox />} label={<div className={styles.check__cancelado}>Cancelado</div>} />
+                        <FormControlLabel control={<Checkbox onChange={e => setFiltroStatus({ ...filtroStatus, concluido: e.target.checked })} />} label={<div className={styles.check__concluido}>Concluído</div>} />
+                        <FormControlLabel control={<Checkbox onChange={e => setFiltroStatus({ ...filtroStatus, andamento: e.target.checked })} />} label={<div className={styles.check__andamento}>Em Andamento</div>} />
+                        <FormControlLabel control={<Checkbox onChange={e => setFiltroStatus({ ...filtroStatus, nao_iniciado: e.target.checked })} />} label={<div className={styles.check__nao_iniciado}>Não Iniciado</div>} />
+                        <FormControlLabel control={<Checkbox onChange={e => setFiltroStatus({ ...filtroStatus, parado: e.target.checked })} />} label={<div className={styles.check__parado}>Parado</div>} />
+                        <FormControlLabel control={<Checkbox onChange={e => setFiltroStatus({ ...filtroStatus, cancelado: e.target.checked })} />} label={<div className={styles.check__cancelado}>Cancelado</div>} />
                     </div>
                 </div>
-                <div className={styles.submit}>
-                    <Button texto='Pesquisar' cor='azul' onClick={() => realizarFiltro()} />
-                </div>
+                {/* <div className={styles.submit}>
+                    <Button texto='Pesquisar' cor='azul' onClick={() => {}} />
+                </div> */}
                 <Divider style={{ background: 'white', width: '100%', marginBottom: 25, marginTop: 20 }} />
             </form>
             {view === 'cards' ? <div className={styles.cards}>
@@ -65,7 +88,7 @@ export default function Visualizar({ view }: any) {
             </div> :
                 <>
                     {trabalhos.map(trabalho => (
-                        <Lista {...trabalho} onClick={() => navigate(`/Projeto/${trabalho.id}`)} />
+                        <Lista key={trabalho.id} {...trabalho} onClick={() => navigate(`/Projeto/${trabalho.id}`)} />
                     ))}
                 </>}
         </div >
