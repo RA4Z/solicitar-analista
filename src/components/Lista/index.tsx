@@ -11,6 +11,7 @@ interface Props {
     ganhoPrevisto: string,
     ganhoReal: string,
     status: string,
+    observacoes: { data: string, ocorrido: string }[],
     onClick: (_: any) => any
 }
 
@@ -33,7 +34,7 @@ export default function Lista(props: Props) {
                     styles.status,
                     styles[`status--${props.status.replace(' ', '_').toLowerCase()}`]
                 )}>{props.status}</li>
-                <li></li>
+                {props.observacoes.length > 0? <li>Observações Cadastradas: {props.observacoes.length}</li> : <li>Nenhuma Observação Cadastrada</li>}
             </div>
             <Divider style={{ background: 'white', width: '100%', marginBottom: 25, marginTop: 20 }} />
         </div>

@@ -20,7 +20,8 @@ export default function Visualizar({ view }: any) {
         dataPrevista: '',
         dataFimReal: '',
         ganhoPrevisto: '',
-        ganhoReal: ''
+        ganhoReal: '',
+        observacoes: [{ data: '', ocorrido: '' }]
     }])
 
     const [backupFiltro, setBackupFiltro] = useState(trabalhos)
@@ -48,8 +49,8 @@ export default function Visualizar({ view }: any) {
             let list = novaLista
             if (lista.length > 0) list = novaLista.filter(item => lista.includes(item.status))
             return list
-            
         }
+
         let lista = []
         if (filtroStatus.concluido) lista.push('Concluído')
         if (filtroStatus.andamento) lista.push('Em Andamento')
