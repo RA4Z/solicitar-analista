@@ -12,6 +12,16 @@
         margin: 3px;
     }
 
+    &__detalhes {
+        color: $normal;
+        cursor: pointer;
+        transition: .3s;
+
+        &:hover {
+            font-weight: bold;
+        }
+    }
+
     li {
         min-width: 33%;
     }

@@ -28,7 +28,7 @@ export default function Lista(props: Props) {
                 {props.ganhoReal ? <li>Ganho real de {props.ganhoReal}</li> : <li>Projeto sem ganho registrado</li>}
             </div>
             <div className={styles.container__linha}>
-                <li style={{ color: '#2E8BC0', cursor:'pointer' }} onClick={props.onClick}>Ver detalhes</li>
+                <li className={styles.container__detalhes} onClick={props.onClick}>Ver detalhes</li>
                 <li className={classNames(
                     styles.status,
                     styles[`status--${props.status.replace(' ', '_').toLowerCase()}`]
