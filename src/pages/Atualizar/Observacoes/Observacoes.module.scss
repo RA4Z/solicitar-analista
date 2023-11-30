@@ -1,0 +1,45 @@
+@import "styles/variaveis";
+@import "styles/breakpoints";
+
+.overlay {
+    background-color: $background-footer;
+    opacity: 0.3;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    z-index: 2;
+    transition: all .5s;
+}
+
+.container {
+    display: flex;
+    align-items: flex-start;
+    width: 700px;
+    padding: 30px;
+    height: 500px;
+    flex-direction: column;
+    color: white;
+    position: fixed;
+    z-index: 3;
+    overflow-y: auto;
+    background-color: $dark;
+
+    li {
+        list-style-type: none;
+        text-align: start;
+    }
+
+    @media(max-width:$tablet) {
+        width: 90%;
+    }
+
+    &__card {
+        display: flex;
+        align-items: flex-start;
+        text-wrap: wrap;
+        flex-direction: column;
+        width: 100%;
+    }
+}

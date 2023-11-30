@@ -11,11 +11,13 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import Observacoes from './Observacoes'
 
 export default function Atualizar() {
     const { id } = useParams()
     const navigate = useNavigate()
     const [open, setOpen] = useState(false);
+    const [obsVisible, setObsVisible] = useState(false)
     const [acesso, setAcesso] = useState(false)
     const [erroSubmit, setErroSubmit] = useState(false)
     const [dados, setDados] = useState({
@@ -81,8 +83,15 @@ export default function Atualizar() {
         navigate('/')
     }
 
+    const visible = (childdata: boolean) => {
+        setObsVisible(childdata)
+    }
+
     return (
         <div className={styles.container}>
+            {obsVisible && <div className={styles.container__obs}>
+                <Observacoes observacoes={dados.observacoes} visible={visible} />
+            </div>}
             <Dialog
                 open={open}
                 onClose={() => setOpen(false)}
@@ -198,7 +207,10 @@ export default function Atualizar() {
                     error={erroSubmit}
                     onChange={e => setObs({ ...obs, ocorrido: e.target.value })}
                     label="Texto da Observação" />
-                <Button texto='Adicionar Observação' cor='azul' onClick={() => adicionarObs()} />
+                <div className={styles.btnsObs}>
+                    <Button texto='Visualizar Observações' cor='amarelo' onClick={() => setObsVisible(true)} />
+                    <Button texto='Adicionar Observação' cor='azul' onClick={() => adicionarObs()} />
+                </div>
             </div>
 
             <div className={styles.buttons}>

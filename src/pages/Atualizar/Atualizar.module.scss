@@ -28,6 +28,11 @@
     padding: 20px;
     margin: 20px;
     color: $text;
+
+    &__obs {
+        display: flex;
+        justify-content: center;
+    }
 }
 
 .previstos {
@@ -91,4 +96,10 @@
     &--cancelado {
         color: $cancelado;
     }
+}
+
+.btnsObs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }

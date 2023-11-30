@@ -3,7 +3,7 @@ import styles from './Button.module.scss'
 interface Props {
     texto: string,
     cor: string,
-    onClick: (_:any) => any
+    onClick: (_: any) => any
 }
 
 export default function Button(props: Props) {
@@ -16,6 +16,9 @@ export default function Button(props: Props) {
                 break;
             case 'vermelho':
                 color = '#9D1010'
+                break;
+            case 'amarelo':
+                color = '#BAB310'
                 break;
             case 'azul claro':
                 color = '#2E8BC0'
