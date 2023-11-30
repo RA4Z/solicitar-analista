@@ -85,7 +85,7 @@ export default function Cadastrar() {
                     <DatePicker label='Data Prevista'
                         format='DD/MM/YYYY'
                         value={dados.dataPrevista}
-                        onChange={e => setDados({ ...dados, dataPrevista: (dayjs(e).format('DD/MM/YYYY').toString()) })}
+                        onChange={e => setDados({ ...dados, dataPrevista: (dayjs(e).format('YYYY-MM-DD').toString()) })}
                         className={styles.input__pequeno} />
                 </LocalizationProvider>
 

@@ -143,18 +143,11 @@ export default function Atualizar() {
                 <LocalizationProvider dateAdapter={AdapterDayjs} >
                     <DatePicker label='Data Prevista'
                         format='DD/MM/YYYY'
-                        value={dados.dataPrevista}
-                        onChange={e => setDados({ ...dados, dataPrevista: (dayjs(e).format('DD/MM/YYYY').toString())})}
+                        value={dayjs(dados.dataPrevista)}
+                        onChange={e => setDados({ ...dados, dataPrevista: (dayjs(e).format('YYYY-MM-DD').toString()) })}
                         className={styles.input__pequeno} />
                 </LocalizationProvider>
-
-                <TextField id="cadastrar-data"
-                    className={styles.input__pequeno}
-                    value={dados.dataPrevista}
-                    error={erroSubmit}
-                    onChange={e => setDados({ ...dados, dataPrevista: e.target.value })}
-                    label="Data Prevista" />
-
+                
                 <TextField id="cadastrar-ganho"
                     className={styles.input__pequeno}
                     value={dados.ganhoPrevisto}
