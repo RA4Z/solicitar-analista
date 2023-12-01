@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import styles from './Lista.module.scss'
 import { Divider } from '@mui/material'
+import dayjs from 'dayjs'
 
 interface Props {
     projeto: string,
@@ -20,7 +21,7 @@ export default function Lista(props: Props) {
         <div className={styles.container}>
             <div className={styles.container__linha}>
                 <li>{props.projeto} - {props.analista}</li>
-                <li>Programado para {props.dataPrevista}</li>
+                <li>Programado para {dayjs(props.dataPrevista).format('DD/MM/YYYY')}</li>
                 <li>Ganho previsto de {props.ganhoPrevisto}</li>
             </div>
             <div className={styles.container__linha}>

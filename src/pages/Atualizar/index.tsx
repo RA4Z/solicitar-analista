@@ -91,6 +91,7 @@ export default function Atualizar() {
     const visible = (childdata: boolean) => {
         setObsVisible(childdata)
     }
+    console.log(dados.dataFimReal !== '' ? dayjs(dados.dataFimReal) : null)
     return (
         <div className={styles.container}>
             {obsVisible && <div className={styles.container__obs}>
@@ -147,7 +148,7 @@ export default function Atualizar() {
                         onChange={e => setDados({ ...dados, dataPrevista: (dayjs(e).format('YYYY-MM-DD').toString()) })}
                         className={styles.input__pequeno} />
                 </LocalizationProvider>
-                
+
                 <TextField id="cadastrar-ganho"
                     className={styles.input__pequeno}
                     value={dados.ganhoPrevisto}
@@ -157,12 +158,15 @@ export default function Atualizar() {
             </div>
 
             <div className={styles.previstos}>
-                <TextField id="cadastrar-data-fim"
-                    className={styles.input__pequeno}
-                    value={dados.dataFimReal}
-                    error={erroSubmit}
-                    onChange={e => setDados({ ...dados, dataFimReal: e.target.value })}
-                    label="Finalizado em" />
+
+                <LocalizationProvider dateAdapter={AdapterDayjs}  >
+                    <DatePicker label='Finalizado em'
+                        format='DD/MM/YYYY'
+                        value={dados.dataFimReal !== '' ? dayjs(dados.dataFimReal) : null}
+                        onChange={e => setDados({ ...dados, dataFimReal: (dayjs(e).format('YYYY-MM-DD').toString()) })}
+                        className={styles.input__pequeno} />
+                </LocalizationProvider>
+
                 <TextField id="cadastrar-ganho-real"
                     className={styles.input__pequeno}
                     value={dados.ganhoReal}
@@ -197,12 +201,13 @@ export default function Atualizar() {
             </FormControl>
 
             <div className={styles.obs}>
-                <TextField id="atualizar-data-obs"
-                    className={styles.input__pequeno}
-                    value={obs.data}
-                    error={erroSubmit}
-                    onChange={e => setObs({ ...obs, data: e.target.value })}
-                    label="Data de observação" />
+                <LocalizationProvider dateAdapter={AdapterDayjs}  >
+                    <DatePicker label='Data de obs.'
+                        format='DD/MM/YYYY'
+                        value={obs.data !== '' ? dayjs(obs.data) : null}
+                        onChange={e => setObs({ ...obs, data: (dayjs(e).format('YYYY-MM-DD').toString()) })}
+                        className={styles.input__pequeno} />
+                </LocalizationProvider>
 
                 <TextField id="atualizar-text-obs"
                     rows={4}
