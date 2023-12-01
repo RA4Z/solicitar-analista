@@ -1,5 +1,5 @@
 import { TextField } from '@mui/material'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './Cadastrar.module.scss'
 import Button from 'components/Button'
 import { useNavigate } from 'react-router-dom'
@@ -26,6 +26,10 @@ export default function Cadastrar() {
         observacoes: []
     })
 
+    useEffect(() => {
+        console.log(dayjs(dados.dataPrevista).isValid())
+    }, [dados.dataPrevista])
+
     const [statusToast, setStatusToast] = useState({
         visivel: false,
         message: ''
@@ -36,7 +40,11 @@ export default function Cadastrar() {
     }
 
     async function realizarCadastro() {
-        if (dados.projeto === '' || dados.analista === '' || dados.descricao === '' || dados.dataPrevista === '' || dados.ganhoPrevisto === '' || dados.solicitante === '') {
+        if (!dayjs(dados.dataPrevista).isValid()) {
+            setStatusToast({ visivel: true, message: 'A data prevista está inválida!' })
+            return
+        }
+        if (dados.projeto === '' || dados.analista === '' || dados.descricao === '' || dados.ganhoPrevisto === '' || dados.solicitante === '') {
             setStatusToast({ visivel: true, message: 'Existem dados em branco' })
             setErroSubmit(true)
             return
