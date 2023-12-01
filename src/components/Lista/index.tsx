@@ -26,7 +26,7 @@ export default function Lista(props: Props) {
             </div>
             <div className={styles.container__linha}>
                 <li>Solicitado por {props.solicitante}</li>
-                {props.dataFimReal ? <li>Finalizado em {props.dataFimReal}</li> : <li>Projeto sem data fim real</li>}
+                {props.dataFimReal ? <li>Finalizado em {dayjs(props.dataFimReal).format('DD/MM/YYYY')}</li> : <li>Projeto sem data fim real</li>}
                 {props.ganhoReal ? <li>Ganho real de {props.ganhoReal}</li> : <li>Projeto sem ganho registrado</li>}
             </div>
             <div className={styles.container__linha}>

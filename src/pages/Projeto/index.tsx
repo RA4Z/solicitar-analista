@@ -6,6 +6,7 @@ import VoltarIMG from 'assets/imagem_voltar.png'
 import classNames from 'classnames';
 import Observacoes from './Observacoes'
 import { infoProjeto } from 'services/firestore'
+import dayjs from 'dayjs'
 
 export default function Projeto() {
     const { id } = useParams()
@@ -54,11 +55,11 @@ export default function Projeto() {
                 {dados.descricao}
             </div>
             <div className={styles.container__esperado}>
-                <div>Programado para {dados.dataPrevista}</div>
+                <div>Programado para {dayjs(dados.dataPrevista).format('DD/MM/YYYY')}</div>
                 <div>Ganho previsto de {dados.ganhoPrevisto}</div>
             </div>
             <div className={styles.container__real}>
-                {dados.dataFimReal && <div>Finalizado em {dados.dataFimReal}</div>}
+                {dados.dataFimReal && <div>Finalizado em {dayjs(dados.dataFimReal).format('DD/MM/YYYY')}</div>}
                 {dados.ganhoReal && <div>Ganho real de {dados.ganhoReal}</div>}
             </div>
             <div className={styles.container__end}>
