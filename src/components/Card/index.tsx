@@ -1,18 +1,20 @@
 import styles from './Card.module.scss'
 import UserIMG from 'assets/imagem_usuario.png'
 import classNames from 'classnames'
+import dayjs from 'dayjs'
 
 interface Props {
     nome: string,
     projeto: string,
-    status: string
-    imagem?: string
+    status: string,
+    imagem?: string,
+    dataProgramado?:string
     onClick?: (_: any) => any
 }
 
 export default function Card(props: Props) {
     return (
-        <div className={styles.container} onClick={props.onClick}>
+        <div className={styles.container} onClick={props.onClick} aria-label={props.dataProgramado && `Programado para ${dayjs(props.dataProgramado).format('DD/MM/YYYY')}`}>
             <img src={props.imagem ? props.imagem : UserIMG} alt='Imagem de usuário' />
             <div className={styles.container__right}>
                 <p>{props.nome}</p>

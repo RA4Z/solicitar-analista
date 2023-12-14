@@ -6,10 +6,9 @@ import { useEffect, useState } from "react";
 
 interface Props {
     trabalhos: Trabalho_Interface[]
-    filtros: { projeto: string, analista: string }
 }
 
-export default function CardsView({ trabalhos, filtros }: Props) {
+export default function CardsView({ trabalhos }: Props) {
     const navigate = useNavigate()
     const [infoCards, setInfoCards] = useState({
         nao_iniciado: trabalhos.filter(trabalho => trabalho.status === 'Não Iniciado'),
@@ -36,6 +35,7 @@ export default function CardsView({ trabalhos, filtros }: Props) {
                         nome={trabalho.analista}
                         status={trabalho.status}
                         projeto={trabalho.projeto}
+                        dataProgramado={trabalho.dataPrevista}
                         onClick={() => navigate(`/Projeto/${trabalho.id}`)} />
                 ))}
             </div>
@@ -46,6 +46,7 @@ export default function CardsView({ trabalhos, filtros }: Props) {
                         nome={trabalho.analista}
                         status={trabalho.status}
                         projeto={trabalho.projeto}
+                        dataProgramado={trabalho.dataPrevista}
                         onClick={() => navigate(`/Projeto/${trabalho.id}`)} />
                 ))}
             </div>
@@ -56,6 +57,7 @@ export default function CardsView({ trabalhos, filtros }: Props) {
                         nome={trabalho.analista}
                         status={trabalho.status}
                         projeto={trabalho.projeto}
+                        dataProgramado={trabalho.dataPrevista}
                         onClick={() => navigate(`/Projeto/${trabalho.id}`)} />
                 ))}
             </div>
@@ -66,6 +68,7 @@ export default function CardsView({ trabalhos, filtros }: Props) {
                         nome={trabalho.analista}
                         status={trabalho.status}
                         projeto={trabalho.projeto}
+                        dataProgramado={trabalho.dataPrevista}
                         onClick={() => navigate(`/Projeto/${trabalho.id}`)} />
                 ))}
             </div>
@@ -76,6 +79,7 @@ export default function CardsView({ trabalhos, filtros }: Props) {
                         nome={trabalho.analista}
                         status={trabalho.status}
                         projeto={trabalho.projeto}
+                        dataProgramado={trabalho.dataPrevista}
                         onClick={() => navigate(`/Projeto/${trabalho.id}`)} />
                 ))}
             </div>
