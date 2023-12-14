@@ -31,11 +31,11 @@
         text-align: center;
     }
 
-    [aria-label] {
+    &[aria-label] {
         position: relative;
     }
 
-    [aria-label]::after {
+    &[aria-label]::after {
         content: attr(aria-label);
         display: none;
         position: absolute;
@@ -50,7 +50,7 @@
         background-color: $medium;
     }
 
-    [aria-label]:hover::after {
+    &[aria-label]:hover::after {
         display: block;
     }
 
