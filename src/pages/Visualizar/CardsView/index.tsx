@@ -2,13 +2,14 @@ import Card from "components/Card";
 import styles from './CardsView.module.scss'
 import { useNavigate } from "react-router-dom";
 import { Trabalho_Interface } from "types/trabalho";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface Props {
     trabalhos: Trabalho_Interface[]
+    filtros: { projeto: string, analista: string }
 }
 
-export default function CardsView({ trabalhos }: Props) {
+export default function CardsView({ trabalhos, filtros }: Props) {
     const navigate = useNavigate()
     const [infoCards, setInfoCards] = useState({
         nao_iniciado: trabalhos.filter(trabalho => trabalho.status === 'Não Iniciado'),
@@ -17,6 +18,15 @@ export default function CardsView({ trabalhos }: Props) {
         parado: trabalhos.filter(trabalho => trabalho.status === 'Parado'),
         cancelado: trabalhos.filter(trabalho => trabalho.status === 'Cancelado'),
     })
+    useEffect(() => {
+        setInfoCards({
+            nao_iniciado: trabalhos.filter(trabalho => trabalho.status === 'Não Iniciado'),
+            em_andamento: trabalhos.filter(trabalho => trabalho.status === 'Em Andamento'),
+            concluido: trabalhos.filter(trabalho => trabalho.status === 'Concluído'),
+            parado: trabalhos.filter(trabalho => trabalho.status === 'Parado'),
+            cancelado: trabalhos.filter(trabalho => trabalho.status === 'Cancelado'),
+        })
+    }, [trabalhos])
     return (
         <div className={styles.container}>
             <div className={styles.cards}>

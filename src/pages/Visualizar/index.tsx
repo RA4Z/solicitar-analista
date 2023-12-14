@@ -90,7 +90,7 @@ export default function Visualizar({ view }: any) {
                 <Divider style={{ background: 'white', width: '100%', marginBottom: 25, marginTop: 20 }} />
             </form>
             {view === 'cards' ?
-                <CardsView trabalhos={trabalhos} />
+                <CardsView trabalhos={trabalhos} filtros={filtros} />
                 :
                 <>
                     {trabalhos.map(trabalho => (
