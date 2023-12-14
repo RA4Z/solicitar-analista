@@ -2,9 +2,9 @@ import styles from './Visualizar.module.scss'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { TextField, Checkbox, FormControlLabel, Divider } from '@mui/material'
-import Card from 'components/Card'
 import { visualizarSolicitacoes } from 'services/firestore'
 import Lista from 'components/Lista'
+import CardsView from './CardsView'
 
 export default function Visualizar({ view }: any) {
     const [filtros, setFiltros] = useState({
@@ -21,7 +21,7 @@ export default function Visualizar({ view }: any) {
         dataFimReal: '',
         ganhoPrevisto: '',
         ganhoReal: '',
-        observacoes: [{ data: '', ocorrido: '' }]
+        observacoes: [{ data: '', ocorrido: '', horaInicio: '', horaFim: '' }]
     }])
 
     const [backupFiltro, setBackupFiltro] = useState(trabalhos)
@@ -87,20 +87,11 @@ export default function Visualizar({ view }: any) {
                         <FormControlLabel control={<Checkbox onChange={e => setFiltroStatus({ ...filtroStatus, cancelado: e.target.checked })} />} label={<div className={styles.check__cancelado}>Cancelado</div>} />
                     </div>
                 </div>
-                {/* <div className={styles.submit}>
-                    <Button texto='Pesquisar' cor='azul' onClick={() => {}} />
-                </div> */}
                 <Divider style={{ background: 'white', width: '100%', marginBottom: 25, marginTop: 20 }} />
             </form>
-            {view === 'cards' ? <div className={styles.cards}>
-                {trabalhos.map(trabalho => (
-                    <Card key={trabalho.id}
-                        nome={trabalho.analista}
-                        status={trabalho.status}
-                        projeto={trabalho.projeto}
-                        onClick={() => navigate(`/Projeto/${trabalho.id}`)} />
-                ))}
-            </div> :
+            {view === 'cards' ?
+                <CardsView trabalhos={trabalhos} />
+                :
                 <>
                     {trabalhos.map(trabalho => (
                         <Lista key={trabalho.id} {...trabalho} onClick={() => navigate(`/Projeto/${trabalho.id}`)} />

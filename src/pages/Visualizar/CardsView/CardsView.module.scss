@@ -1,0 +1,43 @@
+
+.container {
+    display: flex;
+    text-align: center;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+}
+
+.text_title {    
+    &__concluido {
+        color: #369227;
+        font-weight: bold;
+    }
+
+    &__andamento {
+        color: #5590EA;
+        font-weight: bold;
+    }
+
+    &__nao_iniciado {
+        color: #6C6B6B;
+        font-weight: bold;
+    }
+
+    &__parado {
+        color: #BAB310;
+        font-weight: bold;
+    }
+
+    &__cancelado {
+        color: #9D1010;
+        font-weight: bold;
+    }
+}
+
+.cards {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
