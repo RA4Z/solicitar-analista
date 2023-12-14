@@ -69,6 +69,16 @@
     gap: 5px;
     text-align: center;
     flex-direction: column;
+
+    &__inputTime {
+        display: flex;
+        justify-content: space-between;
+        
+        &__left{
+            display: flex;
+            gap: 10px;
+        }
+    }
 }
 
 .status_projeto {

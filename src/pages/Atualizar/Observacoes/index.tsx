@@ -2,10 +2,11 @@ import styles from './Observacoes.module.scss'
 import { useState } from 'react'
 import Lixeira from 'assets/lixeira.png'
 import { Divider } from '@mui/material'
+import dayjs from 'dayjs'
 
 interface Props {
     visible: any,
-    observacoes: { data: string, ocorrido: string }[]
+    observacoes: { data: string, ocorrido: string, horaInicio: string, horaFim: string }[]
 }
 
 export default function Observacoes(props: Props) {
@@ -23,7 +24,7 @@ export default function Observacoes(props: Props) {
                 {obs.map((obs, index) => (
                     <div className={styles.container__card} key={index}>
                         <div className={styles.container__date}>
-                            <li>{obs.data}</li>
+                            <li>{dayjs(obs.data).format('DD/MM/YYYY')} ----- {obs.horaInicio} até {obs.horaFim}</li>
                             <img src={Lixeira} alt='Lixeira' title='Deletar Observação' onClick={() => deletarObs(index)} />
                         </div>
                         <li>{obs.ocorrido}</li>

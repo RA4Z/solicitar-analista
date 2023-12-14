@@ -16,6 +16,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs'
+import { TimePicker } from '@mui/x-date-pickers'
 
 
 export default function Atualizar() {
@@ -32,12 +33,12 @@ export default function Atualizar() {
         descricao: '',
         ganhoPrevisto: '',
         ganhoReal: '',
-        observacoes: [{ data: '', ocorrido: '' }],
+        observacoes: [{ data: '', ocorrido: '', horaInicio: '', horaFim: '' }],
         projeto: '',
         solicitante: '',
         status: 'Não Iniciado'
     })
-    const [obs, setObs] = useState({ data: '', ocorrido: '' })
+    const [obs, setObs] = useState({ data: '', ocorrido: '', horaInicio: '', horaFim: '' })
     const [statusToast, setStatusToast] = useState({
         visivel: false,
         message: ''
@@ -69,9 +70,13 @@ export default function Atualizar() {
     }
 
     function adicionarObs() {
-        if (obs.data && obs.ocorrido) {
-            dados.observacoes.push({ data: obs.data, ocorrido: obs.ocorrido })
-            setObs({ data: '', ocorrido: '' })
+        if(dayjs(obs.horaInicio) > dayjs(obs.horaFim)) {
+            setStatusToast({ visivel: true, message: 'O horário de início não pode ser maior do que o horário de fim!' })
+            return
+        }
+        if (obs.data && obs.ocorrido && obs.horaInicio && obs.horaFim) {
+            dados.observacoes.push({ data: obs.data, ocorrido: obs.ocorrido, horaInicio: dayjs(obs.horaInicio).format('HH:mm A'), horaFim: dayjs(obs.horaFim).format('HH:mm A') })
+            setObs({ data: '', ocorrido: '', horaInicio: '', horaFim: '' })
             setStatusToast({ visivel: true, message: 'Observação Adicionada!' })
         }
     }
@@ -201,13 +206,28 @@ export default function Atualizar() {
             </FormControl>
 
             <div className={styles.obs}>
-                <LocalizationProvider dateAdapter={AdapterDayjs}  >
-                    <DatePicker label='Data de obs.'
-                        format='DD/MM/YYYY'
-                        value={obs.data !== '' ? dayjs(obs.data) : null}
-                        onChange={e => setObs({ ...obs, data: (dayjs(e).format('YYYY-MM-DD').toString()) })}
-                        className={styles.input__pequeno} />
-                </LocalizationProvider>
+                <div className={styles.obs__inputTime}>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}  >
+                        <DatePicker label='Data de obs.'
+                            format='DD/MM/YYYY'
+                            value={obs.data !== '' ? dayjs(obs.data) : null}
+                            onChange={e => setObs({ ...obs, data: (dayjs(e).format('YYYY-MM-DD').toString()) })}
+                            className={styles.input__pequeno} />
+                        <div className={styles.obs__inputTime__left}>
+
+                            <TimePicker label="Hora Início"
+                                value={obs.horaInicio !== '' ? obs.horaInicio : null}
+                                onChange={(newValue) => setObs({ ...obs, horaInicio: newValue!.toString() })}
+                                className={styles.input__pequeno} />
+
+                            <TimePicker label="Hora Fim"
+                                value={obs.horaFim !== '' ? obs.horaFim : null}
+                                onChange={(newValue) => setObs({ ...obs, horaFim: newValue!.toString() })}
+                                className={styles.input__pequeno} />
+                        </div>
+
+                    </LocalizationProvider>
+                </div>
 
                 <TextField id="atualizar-text-obs"
                     rows={4}

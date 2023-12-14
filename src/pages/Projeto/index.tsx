@@ -20,7 +20,7 @@ export default function Projeto() {
         descricao: '',
         ganhoPrevisto: '',
         ganhoReal: '',
-        observacoes: [{ data: '', ocorrido: '' }],
+        observacoes: [{ data: '', ocorrido: '', horaInicio: '', horaFim: '' }],
         projeto: '',
         solicitante: '',
         status: ''
