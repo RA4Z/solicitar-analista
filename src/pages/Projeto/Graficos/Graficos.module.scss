@@ -1,0 +1,25 @@
+@import "styles/variaveis";
+@import "styles/breakpoints";
+
+.status {
+
+    &--concluído {
+        fill: $concluido;
+    }
+
+    &--não_iniciado {
+        fill: $nao_iniciado;
+    }
+
+    &--em_andamento {
+        fill: $em_andamento;
+    }
+
+    &--parado {
+        fill: $parado;
+    }
+
+    &--cancelado {
+        fill: $cancelado;
+    }
+}

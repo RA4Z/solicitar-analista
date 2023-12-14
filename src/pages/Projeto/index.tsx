@@ -7,6 +7,7 @@ import classNames from 'classnames';
 import Observacoes from './Observacoes'
 import { infoProjeto } from 'services/firestore'
 import dayjs from 'dayjs'
+import Graficos from './Graficos'
 
 export default function Projeto() {
     const { id } = useParams()
@@ -20,7 +21,7 @@ export default function Projeto() {
         descricao: '',
         ganhoPrevisto: '',
         ganhoReal: '',
-        observacoes: [{ data: '', ocorrido: '', horaInicio: '', horaFim: '' }],
+        observacoes: [{ data: '', ocorrido: '', horaInicio: '', horaFim: '', tempoMinutos: 0 }],
         projeto: '',
         solicitante: '',
         status: ''
@@ -64,6 +65,9 @@ export default function Projeto() {
             </div>
             <div className={styles.container__end}>
                 Solicitado por {dados.solicitante}
+            </div>
+            <div className={styles.graph}>
+                {dados.observacoes.length > 0 && <Graficos observacoes={dados.observacoes} status={dados.status} />}
             </div>
             <Button texto='Visualizar Histórico de Observações' cor='azul claro' onClick={() => setObsVisible(true)} />
         </div>
