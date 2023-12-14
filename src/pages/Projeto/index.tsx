@@ -27,6 +27,12 @@ export default function Projeto() {
         status: ''
     })
 
+    let totalHorasTrabalhadas = 0
+    for (let tempo of dados.observacoes) {
+        totalHorasTrabalhadas = totalHorasTrabalhadas + tempo.tempoMinutos
+    }
+    totalHorasTrabalhadas = Number((totalHorasTrabalhadas / 60).toFixed(2))
+
     const visible = (childdata: boolean) => {
         setObsVisible(childdata)
     }
@@ -67,6 +73,7 @@ export default function Projeto() {
                 Solicitado por {dados.solicitante}
             </div>
             <div className={styles.graph}>
+                <p>Total de horas trabalhadas nesse projeto: {totalHorasTrabalhadas}</p>
                 {dados.observacoes.length > 0 && <Graficos observacoes={dados.observacoes} status={dados.status} />}
             </div>
             <Button texto='Visualizar Histórico de Observações' cor='azul claro' onClick={() => setObsVisible(true)} />
