@@ -1,5 +1,6 @@
 import { Dialog, DialogContent } from "@mui/material";
 import { Trabalho_Interface } from "types/trabalho";
+import { calcularSomaTotal } from "utils/matematica";
 
 interface Props {
     grafico: any,
@@ -16,8 +17,7 @@ export default function Graficos(props: Props) {
             <DialogContent>
                 {props.trabalhos.map(trabalho => (
                     <div>
-                        <h3>{trabalho.projeto}</h3>
-                        {trabalho.observacoes.map(obs => (<p>{obs.ocorrido} - {obs.tempoMinutos}</p>))}
+                        {calcularSomaTotal(trabalho) > 0 && <h3>{trabalho.projeto} - {(calcularSomaTotal(trabalho) / 60).toFixed(2)}h</h3>}
                     </div>
                 ))}
             </DialogContent>
