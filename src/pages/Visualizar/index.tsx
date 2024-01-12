@@ -2,9 +2,11 @@ import styles from './Visualizar.module.scss'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { TextField, Checkbox, FormControlLabel, Divider } from '@mui/material'
+import * as XLSX from 'xlsx';
 import { visualizarSolicitacoes } from 'services/firestore'
 import Lista from 'components/Lista'
 import CardsView from './CardsView'
+import Button from 'components/Button';
 
 export default function Visualizar({ view }: any) {
     const [filtros, setFiltros] = useState({
@@ -63,8 +65,22 @@ export default function Visualizar({ view }: any) {
         setTrabalhos(novaLista)
     }, [filtros, filtroStatus, backupFiltro])
 
+    const exportToExcel = (fileName: string) => {
+        const ws = XLSX.utils.json_to_sheet(trabalhos);
+        const wb = { Sheets: { 'Sheet 1': ws }, SheetNames: ['Sheet 1'] };
+        const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+
+        const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = `${fileName}.xlsx`;
+        link.click();
+    };
+
+
     return (
         <div className={styles.container}>
+            <Button texto='Exportar dados em Excel' cor='azul claro' onClick={() => exportToExcel('Relatório Analistas')} />
             <form>
                 <div className={styles.pesquisas}>
                     <div className={styles.pesquisas__left}>
