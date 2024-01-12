@@ -7,11 +7,13 @@ import { visualizarSolicitacoes } from 'services/firestore'
 import Lista from 'components/Lista'
 import CardsView from './CardsView'
 import Button from 'components/Button';
+import Graficos from 'components/Graficos';
 
 export default function Visualizar({ view }: any) {
     const [filtros, setFiltros] = useState({
         projeto: '', analista: ''
     })
+    const [grafico, setGrafico] = useState(false)
     const [filtroStatus, setFiltroStatus] = useState({ concluido: false, andamento: false, nao_iniciado: false, parado: false, cancelado: false })
     const [trabalhos, setTrabalhos] = useState([{
         id: '',
@@ -23,7 +25,7 @@ export default function Visualizar({ view }: any) {
         dataFimReal: '',
         ganhoPrevisto: '',
         ganhoReal: '',
-        observacoes: [{ data: '', ocorrido: '', horaInicio: '', horaFim: '' }]
+        observacoes: [{ data: '', ocorrido: '', horaInicio: '', horaFim: '', tempoMinutos: 0 }]
     }])
 
     const [backupFiltro, setBackupFiltro] = useState(trabalhos)
@@ -59,7 +61,6 @@ export default function Visualizar({ view }: any) {
         if (filtroStatus.parado) lista.push('Parado')
         if (filtroStatus.cancelado) lista.push('Cancelado')
         if (filtroStatus.nao_iniciado) lista.push('Não Iniciado')
-        console.log(lista)
         let novaLista = backupFiltro.filter(item => testaProjeto(item.projeto) && testaAnalista(item.analista))
         novaLista = testaStatus(lista, novaLista)
         setTrabalhos(novaLista)
@@ -80,7 +81,11 @@ export default function Visualizar({ view }: any) {
 
     return (
         <div className={styles.container}>
-            <Button texto='Exportar dados em Excel' cor='azul claro' onClick={() => exportToExcel('Relatório Analistas')} />
+            <Graficos grafico={grafico} setGrafico={setGrafico} trabalhos={trabalhos} />
+            <div style={{ display: 'flex', justifyContent: 'center', gap: 10 }}>
+                <Button texto='Visualizar Gráficos' cor='azul claro' onClick={() => setGrafico(true)} />
+                <Button texto='Exportar em Excel' cor='verde' onClick={() => exportToExcel('Relatório Analista')} />
+            </div>
             <form>
                 <div className={styles.pesquisas}>
                     <div className={styles.pesquisas__left}>

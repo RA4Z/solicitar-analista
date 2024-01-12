@@ -1,5 +1,5 @@
 import { TextField } from '@mui/material'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import styles from './Cadastrar.module.scss'
 import Button from 'components/Button'
 import { useNavigate } from 'react-router-dom'
@@ -25,10 +25,6 @@ export default function Cadastrar() {
         status: 'Não Iniciado',
         observacoes: []
     })
-
-    useEffect(() => {
-        console.log(dayjs(dados.dataPrevista).isValid())
-    }, [dados.dataPrevista])
 
     const [statusToast, setStatusToast] = useState({
         visivel: false,

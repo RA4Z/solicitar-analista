@@ -8,5 +8,5 @@ export interface Trabalho_Interface {
     dataFimReal: string,
     ganhoPrevisto: string,
     ganhoReal: string,
-    observacoes: { data: string, ocorrido: string, horaInicio: string, horaFim: string }[]
+    observacoes: { data: string, ocorrido: string, horaInicio: string, horaFim: string, tempoMinutos: number }[]
 }
