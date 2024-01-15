@@ -75,7 +75,7 @@ export default function Atualizar() {
             setStatusToast({ visivel: true, message: 'O horário de início não pode ser maior do que o horário de fim!' })
             return
         }
-        if (obs.data && obs.ocorrido && obs.horaInicio && obs.horaFim) {
+        if (obs.data && obs.horaInicio && obs.horaFim) {
             const diferencaMinutos = (dayjs(obs.horaFim).diff(dayjs(obs.horaInicio), 'minutes'))
             dados.observacoes.push({ data: obs.data, ocorrido: obs.ocorrido, horaInicio: dayjs(obs.horaInicio).format('HH:mm A'), horaFim: dayjs(obs.horaFim).format('HH:mm A'), tempoMinutos: diferencaMinutos })
             setObs({ data: '', ocorrido: '', horaInicio: '', horaFim: '', tempoMinutos: 0 })
