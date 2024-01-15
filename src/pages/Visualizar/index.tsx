@@ -83,7 +83,7 @@ export default function Visualizar({ view }: any) {
         <div className={styles.container}>
             <Graficos grafico={grafico} setGrafico={setGrafico} trabalhos={trabalhos} />
             <div style={{ display: 'flex', justifyContent: 'center', gap: 10 }}>
-                <Button texto='Visualizar Gráficos' cor='azul claro' onClick={() => setGrafico(true)} />
+                {/* <Button texto='Visualizar Gráficos' cor='azul claro' onClick={() => setGrafico(true)} /> */}
                 <Button texto='Exportar em Excel' cor='verde' onClick={() => exportToExcel('Relatório Analista')} />
             </div>
             <form>
