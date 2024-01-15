@@ -9,7 +9,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs'
-import SelecionarAnalista from 'components/SelecionarAnalista'
+import { Analista, Solicitante } from 'components/Selecionar'
 
 export default function Cadastrar() {
     const navigate = useNavigate()
@@ -67,7 +67,7 @@ export default function Cadastrar() {
                     onChange={e => setDados({ ...dados, projeto: e.target.value })}
                     label="Título do Projeto" />
 
-                <SelecionarAnalista dados={dados} setDados={setDados} />
+                <Analista dados={dados} setDados={setDados} />
             </div>
             <TextField id="cadastrar-descricao"
                 rows={7}
@@ -95,12 +95,7 @@ export default function Cadastrar() {
                     onChange={e => setDados({ ...dados, ganhoPrevisto: e.target.value })}
                     label="Ganho Previsto" />
             </div>
-            <TextField id="cadastrar-solicitante"
-                className={styles.input}
-                error={erroSubmit}
-                value={dados.solicitante}
-                onChange={e => setDados({ ...dados, solicitante: e.target.value })}
-                label="Solicitado por" />
+            <Solicitante dados={dados} setDados={setDados} />
 
             <Button texto='Cadastrar Projeto' cor='verde' onClick={() => realizarCadastro()} />
             <Snackbar
