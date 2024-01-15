@@ -9,6 +9,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs'
+import SelecionarAnalista from 'components/SelecionarAnalista'
 
 export default function Cadastrar() {
     const navigate = useNavigate()
@@ -59,7 +60,6 @@ export default function Cadastrar() {
         <div className={styles.container}>
             <h1 className={styles.title}>Solicitar trabalho para um analista</h1>
             <div className={styles.linhaStart}>
-
                 <TextField id="cadastrar-titulo"
                     className={styles.input}
                     value={dados.projeto}
@@ -67,12 +67,7 @@ export default function Cadastrar() {
                     onChange={e => setDados({ ...dados, projeto: e.target.value })}
                     label="Título do Projeto" />
 
-                <TextField id="cadastrar-analista"
-                    className={styles.input}
-                    value={dados.analista}
-                    error={erroSubmit}
-                    onChange={e => setDados({ ...dados, analista: e.target.value })}
-                    label="Analista Responsável" />
+                <SelecionarAnalista dados={dados} setDados={setDados} />
             </div>
             <TextField id="cadastrar-descricao"
                 rows={7}

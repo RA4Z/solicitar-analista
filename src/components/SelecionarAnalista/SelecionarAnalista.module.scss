@@ -1,0 +1,8 @@
+@import "styles/variaveis";
+@import "styles/breakpoints";
+
+.input {
+    background-color: white;
+    width: calc(100px + 30vmin);
+    border-radius: 10px;
+}

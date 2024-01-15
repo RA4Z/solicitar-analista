@@ -17,6 +17,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs'
 import { TimePicker } from '@mui/x-date-pickers'
+import SelecionarAnalista from 'components/SelecionarAnalista'
 
 
 export default function Atualizar() {
@@ -129,12 +130,7 @@ export default function Atualizar() {
                     onChange={e => setDados({ ...dados, projeto: e.target.value })}
                     label="Título do Projeto" />
 
-                <TextField id="cadastrar-analista"
-                    className={styles.input}
-                    value={dados.analista}
-                    error={erroSubmit}
-                    onChange={e => setDados({ ...dados, analista: e.target.value })}
-                    label="Analista Responsável" />
+                <SelecionarAnalista dados={dados.analista} setDados={setDados} />
             </div>
             <TextField id="cadastrar-descricao"
                 rows={7}

@@ -7,13 +7,11 @@ import { visualizarSolicitacoes } from 'services/firestore'
 import Lista from 'components/Lista'
 import CardsView from './CardsView'
 import Button from 'components/Button';
-import Graficos from 'components/Graficos';
 
 export default function Visualizar({ view }: any) {
     const [filtros, setFiltros] = useState({
         projeto: '', analista: ''
     })
-    const [grafico, setGrafico] = useState(false)
     const [filtroStatus, setFiltroStatus] = useState({ concluido: false, andamento: false, nao_iniciado: false, parado: false, cancelado: false })
     const [trabalhos, setTrabalhos] = useState([{
         id: '',
@@ -81,9 +79,7 @@ export default function Visualizar({ view }: any) {
 
     return (
         <div className={styles.container}>
-            <Graficos grafico={grafico} setGrafico={setGrafico} trabalhos={trabalhos} />
             <div style={{ display: 'flex', justifyContent: 'center', gap: 10 }}>
-                {/* <Button texto='Visualizar Gráficos' cor='azul claro' onClick={() => setGrafico(true)} /> */}
                 <Button texto='Exportar em Excel' cor='verde' onClick={() => exportToExcel('Relatório Analista')} />
             </div>
             <form>
