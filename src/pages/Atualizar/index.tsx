@@ -130,7 +130,7 @@ export default function Atualizar() {
                     onChange={e => setDados({ ...dados, projeto: e.target.value })}
                     label="Título do Projeto" />
 
-                <SelecionarAnalista dados={dados.analista} setDados={setDados} />
+                <SelecionarAnalista dados={dados} setDados={setDados} />
             </div>
             <TextField id="cadastrar-descricao"
                 rows={7}
