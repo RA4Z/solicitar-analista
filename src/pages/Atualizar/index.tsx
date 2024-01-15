@@ -32,6 +32,7 @@ export default function Atualizar() {
         dataFimReal: '',
         dataPrevista: '',
         descricao: '',
+        dataSolicitada: '',
         ganhoPrevisto: '',
         ganhoReal: '',
         observacoes: [{ data: '', ocorrido: '', horaInicio: '', horaFim: '', tempoMinutos: 0 }],
@@ -142,6 +143,15 @@ export default function Atualizar() {
                 label="Descrição do projeto" />
 
             <div className={styles.previstos}>
+
+                <LocalizationProvider dateAdapter={AdapterDayjs} >
+                    <DatePicker label='Data Solicitada'
+                        format='DD/MM/YYYY'
+                        value={dados.dataSolicitada !== '' ? dayjs(dados.dataSolicitada) : null}
+                        onChange={e => setDados({ ...dados, dataSolicitada: (dayjs(e).format('YYYY-MM-DD').toString()) })}
+                        className={styles.input__pequeno} />
+                </LocalizationProvider>
+
                 <LocalizationProvider dateAdapter={AdapterDayjs} >
                     <DatePicker label='Data Prevista'
                         format='DD/MM/YYYY'

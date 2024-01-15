@@ -19,6 +19,7 @@ export default function Cadastrar() {
         analista: '',
         descricao: '',
         dataPrevista: '',
+        dataSolicitada: '',
         ganhoPrevisto: '',
         solicitante: '',
         dataFimReal: '',
@@ -79,6 +80,14 @@ export default function Cadastrar() {
                 label="Descrição do projeto" />
 
             <div className={styles.previstos}>
+
+                <LocalizationProvider dateAdapter={AdapterDayjs} >
+                    <DatePicker label='Data Solicitada'
+                        format='DD/MM/YYYY'
+                        value={dados.dataSolicitada !== '' ? dayjs(dados.dataSolicitada) : null}
+                        onChange={e => setDados({ ...dados, dataSolicitada: (dayjs(e).format('YYYY-MM-DD').toString()) })}
+                        className={styles.input__pequeno} />
+                </LocalizationProvider>
 
                 <LocalizationProvider dateAdapter={AdapterDayjs} >
                     <DatePicker label='Data Prevista'

@@ -20,6 +20,7 @@ export default function Projeto() {
         dataPrevista: '',
         descricao: '',
         ganhoPrevisto: '',
+        dataSolicitada: '',
         ganhoReal: '',
         observacoes: [{ data: '', ocorrido: '', horaInicio: '', horaFim: '', tempoMinutos: 0 }],
         projeto: '',
@@ -70,7 +71,7 @@ export default function Projeto() {
                 {dados.ganhoReal && <div>Ganho real de {dados.ganhoReal}</div>}
             </div>
             <div className={styles.container__end}>
-                Solicitado por {dados.solicitante}
+                Solicitado por {dados.solicitante} {dados.dataSolicitada !== '' && `em ${dayjs(dados.dataSolicitada).format('DD/MM/YYYY')}`}
             </div>
             <div className={styles.graph}>
                 <p>Total de horas trabalhadas nesse projeto: {totalHorasTrabalhadas}</p>
