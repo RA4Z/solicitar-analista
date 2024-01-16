@@ -163,6 +163,7 @@ export default function Atualizar() {
                 <TextField id="cadastrar-ganho"
                     className={styles.input__pequeno}
                     value={dados.ganhoPrevisto}
+                    type='number'
                     error={erroSubmit}
                     onChange={e => setDados({ ...dados, ganhoPrevisto: e.target.value })}
                     label="Ganho Previsto" />
@@ -181,6 +182,7 @@ export default function Atualizar() {
                 <TextField id="cadastrar-ganho-real"
                     className={styles.input__pequeno}
                     value={dados.ganhoReal}
+                    type='number'
                     error={erroSubmit}
                     onChange={e => setDados({ ...dados, ganhoReal: e.target.value })}
                     label="Ganho Real" />

@@ -64,11 +64,11 @@ export default function Projeto() {
             </div>
             <div className={styles.container__esperado}>
                 <div>Programado para {dayjs(dados.dataPrevista).format('DD/MM/YYYY')}</div>
-                <div>Ganho previsto de {dados.ganhoPrevisto}</div>
+                <div>Ganho previsto de {dados.ganhoPrevisto}R$</div>
             </div>
             <div className={styles.container__real}>
                 {dados.dataFimReal && <div>Finalizado em {dayjs(dados.dataFimReal).format('DD/MM/YYYY')}</div>}
-                {dados.ganhoReal && <div>Ganho real de {dados.ganhoReal}</div>}
+                {dados.ganhoReal && <div>Ganho real de {dados.ganhoReal}R$</div>}
             </div>
             <div className={styles.container__end}>
                 Solicitado por {dados.solicitante} {dados.dataSolicitada !== '' && `em ${dayjs(dados.dataSolicitada).format('DD/MM/YYYY')}`}

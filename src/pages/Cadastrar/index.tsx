@@ -99,6 +99,7 @@ export default function Cadastrar() {
 
                 <TextField id="cadastrar-ganho"
                     className={styles.input__pequeno}
+                    type='number'
                     value={dados.ganhoPrevisto}
                     error={erroSubmit}
                     onChange={e => setDados({ ...dados, ganhoPrevisto: e.target.value })}
