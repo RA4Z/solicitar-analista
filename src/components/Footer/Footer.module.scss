@@ -1,20 +1,112 @@
 @import "styles/variaveis";
 @import "styles/breakpoints";
 
-.background {
+.faleConosco {
     display: flex;
-    justify-content: center;
-    text-align: center;
-    margin-top: 100px;
-    padding: 30px;
     flex-direction: column;
+    list-style-type: none;
+    align-items: center;
+    gap: 10px;
+    padding: 20px 50px 20px 50px;
+
+    &__input {
+        width: calc(50px + 30vmin);
+        background-color: $backgrounds;
+    }
+
+    @media(max-width: $mobile) {
+        padding: 0;
+    }
+}
+
+.container {
     background-color: $background-footer;
-    
-    button, a {
+    text-align: center;
+    padding: 30px 30px 10px 30px;
+    margin-top: 100px;
+
+    &__button,
+    p,
+    li,
+    a {
         border: none;
         text-decoration: none;
         background-color: transparent;
+        margin: 0;
         color: $text;
-        font-size: calc(8px + 2vmin);
+        font-size: calc(6px + 2vmin);
+    }
+
+    &__button {
+        font-size: calc(12px + 2vmin);
+        font-weight: bold;
+    }
+}
+
+.background {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    text-align: center;
+    gap: 15px;
+
+    &__logotipo {
+        height: calc(30px + 10vmin);
+    }
+
+    &__dev {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.atribuicoes {
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+
+    li {
+        font-size: calc(9px + 1vmin);
+        text-align: start;
+
+        @media(max-width: $mobile) {
+            list-style-type: none;
+            text-align: center;
+        }
+    }
+
+    a {
+        li {
+            transition: 0.5s;
+            cursor: pointer;
+
+            &:hover {
+                color: $texto-secundario;
+            }
+        }
+    }
+
+}
+
+.social {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 10px;
+    gap: 15px;
+
+    img {
+        height: calc(10px + 5vmin);
+        background-color: white;
+        border-radius: 100px;
+        border-style: solid;
+        cursor: pointer;
+        transition: 1s;
+
+        &:hover {
+            border-color: white;
+        }
+
     }
 }
