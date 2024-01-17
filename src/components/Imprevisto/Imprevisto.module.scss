@@ -1,0 +1,29 @@
+@import "styles/variaveis";
+@import "styles/breakpoints";
+
+.input {
+    &__description {
+        background-color: white;
+        width: 100%;
+        border-radius: 10px;
+    }
+}
+
+.obs {
+    display: flex;
+    padding: 20px;
+    gap: 5px;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+
+    &__inputTime {
+        display: flex;
+        justify-content: space-between;
+
+        &__left {
+            display: flex;
+            gap: 10px;
+        }
+    }
+}

@@ -58,3 +58,13 @@ export async function deletarProjeto(projetoID: any) {
         return 'error'
     }
 }
+
+export async function cadastrarTrabalhoParalelo(data: any) {
+    try {
+        await addDoc(collection(db, 'paralelos'), data)
+        return true
+    } catch (error) {
+        console.log(error)
+        return false
+    }
+}
