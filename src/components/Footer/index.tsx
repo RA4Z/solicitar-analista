@@ -44,14 +44,14 @@ function Footer() {
                 </div>
 
                 <div className={styles.atribuicoes}>
-                    <li style={{ listStyle: 'none', textAlign: 'center', color: '#64CCC5' }}>Contato dos Analistas:</li>
-                    <a href="https://colaboradores.weg.net/colaboradores.aspx?chave=C_1001_31798" target="_blank" rel="noreferrer"><li>Alisson Mazuim - alisson@weg.net</li></a>
-                    <a href="https://colaboradores.weg.net/colaboradores.aspx?chave=C_1001_35973" target="_blank" rel="noreferrer"><li>Anderson Paulo da Luz - andersonpl@weg.net</li></a>
-                    <a href="https://colaboradores.weg.net/colaboradores.aspx?chave=C_1001_77661" target="_blank" rel="noreferrer"><li>Daniel Assis Amancio - amanciod@weg.net</li></a>
-                    <a href="https://colaboradores.weg.net/colaboradores.aspx?chave=C_1001_77660" target="_blank" rel="noreferrer"><li>Fabiana Glasenapp - fglasenapp@weg.net</li></a>
-                    <a href="https://colaboradores.weg.net/colaboradores.aspx?chave=C_1001_68954" target="_blank" rel="noreferrer"><li>Karoline Luciani Fritsche karolinel@weg.net</li></a>
-                    <a href="https://colaboradores.weg.net/colaboradores.aspx?chave=C_1001_76993" target="_blank" rel="noreferrer"><li>Rogerio Henrique de Oliveira Schneider rogeriohs@weg.net</li></a>
-                    <a href="https://colaboradores.weg.net/colaboradores.aspx?chave=C_1001_49109" target="_blank" rel="noreferrer"><li>Rohan Dorneles Machado - rohan@weg.net</li></a>
+                    <li style={{ listStyle: 'none', color: '#64CCC5' }}>Contato dos Analistas:</li>
+                    <a href="https://colaboradores.weg.net/colaboradores.aspx?chave=C_1001_31798" target="_blank" rel="noreferrer"><li>Alisson Mazuim</li></a>
+                    <a href="https://colaboradores.weg.net/colaboradores.aspx?chave=C_1001_35973" target="_blank" rel="noreferrer"><li>Anderson Paulo da Luz</li></a>
+                    <a href="https://colaboradores.weg.net/colaboradores.aspx?chave=C_1001_77661" target="_blank" rel="noreferrer"><li>Daniel Assis Amancio</li></a>
+                    <a href="https://colaboradores.weg.net/colaboradores.aspx?chave=C_1001_77660" target="_blank" rel="noreferrer"><li>Fabiana Glasenapp</li></a>
+                    <a href="https://colaboradores.weg.net/colaboradores.aspx?chave=C_1001_68954" target="_blank" rel="noreferrer"><li>Karoline Luciani Fritsche</li></a>
+                    <a href="https://colaboradores.weg.net/colaboradores.aspx?chave=C_1001_76993" target="_blank" rel="noreferrer"><li>Rogerio Henrique de Oliveira Schneider</li></a>
+                    <a href="https://colaboradores.weg.net/colaboradores.aspx?chave=C_1001_49109" target="_blank" rel="noreferrer"><li>Rohan Dorneles Machado</li></a>
                 </div>
             </div>
             <Divider style={{ background: 'white', margin: 10 }} />

@@ -6,6 +6,7 @@ import Footer from "components/Footer";
 import { Box, LinearProgress } from "@mui/material";
 
 const Cadastrar = lazy(() => import('pages/Cadastrar'));
+const Paralelos = lazy(() => import('pages/Paralelos'));
 const Projeto = lazy(() => import('pages/Projeto'));
 const Atualizar = lazy(() => import('pages/Atualizar'));
 
@@ -24,12 +25,13 @@ export default function AppRouter() {
                     <Route path='/' element={<Header formato={formato} />}>
                         <Route index element={<Visualizar view={viewForm} />} />
                         <Route path='/Cadastro' element={<Cadastrar />} />
+                        <Route path='/Paralelos' element={<Paralelos />} />
                         <Route path='/Projeto/:id' element={<Projeto />} />
                         <Route path='/Atualizar/:id' element={<Atualizar />} />
                     </Route>
                 </Routes>
+                <Footer />
             </Suspense>
-            <Footer />
         </Router>
     )
 }

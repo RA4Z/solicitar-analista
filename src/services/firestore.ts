@@ -1,5 +1,5 @@
 import { db } from 'config/firebase';
-import { addDoc, collection, deleteDoc, doc, getDoc, onSnapshot, query, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, onSnapshot, orderBy, query, updateDoc } from 'firebase/firestore';
 
 export async function salvarSolicitacao(data: any) {
     try {
@@ -67,4 +67,15 @@ export async function cadastrarTrabalhoParalelo(data: any) {
         console.log(error)
         return false
     }
+}
+export async function buscarTrabalhosParalelos(setSolicitacoes: any, setBackup?: any) {
+    const ref = query(collection(db, "paralelos"), orderBy('data', 'desc'))
+    onSnapshot(ref, (querySnapshot) => {
+        const posts: any[] = []
+        querySnapshot.forEach((doc) => {
+            posts.push({ id: doc.id, ...doc.data() })
+        })
+        setSolicitacoes(posts)
+        if (setBackup) setBackup(posts)
+    })
 }

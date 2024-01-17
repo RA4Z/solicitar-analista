@@ -1,0 +1,53 @@
+@import "styles/variaveis";
+@import "styles/breakpoints";
+
+.container {
+    padding: 50px;
+    min-height: 80vh;
+}
+
+.pesquisas {
+    height: auto;
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 30px;
+}
+
+.input {
+    background-color: white;
+    width: 40%;
+}
+
+.paralelos {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    padding: 25px;
+    margin: 10px;
+    width: 400px;
+    height: 155px;
+    text-align: center;
+    box-shadow: 1px 1px 10px 2px #2f2f2f;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &__front {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+    }
+
+    p {
+        font-size: 17px;
+        font-weight: 500;
+    }
+}
