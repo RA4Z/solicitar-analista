@@ -7,6 +7,7 @@ import { visualizarSolicitacoes } from 'services/firestore'
 import Lista from 'components/Lista'
 import CardsView from './CardsView'
 import Button from 'components/Button';
+import { Analista } from 'components/Selecionar';
 
 export default function Visualizar({ view }: any) {
     const [filtros, setFiltros] = useState({
@@ -91,11 +92,7 @@ export default function Visualizar({ view }: any) {
                             value={filtros.projeto}
                             onChange={e => setFiltros({ ...filtros, projeto: e.target.value })}
                             label="Filtrar por Título do Projeto" />
-                        <TextField id="cadastrar-analista"
-                            className={styles.input}
-                            value={filtros.analista}
-                            onChange={e => setFiltros({ ...filtros, analista: e.target.value })}
-                            label="Filtrar por Nome de Analista" />
+                        <Analista dados={filtros} setDados={setFiltros} />
                     </div>
                     <div className={styles.pesquisas__right}>
                         <FormControlLabel control={<Checkbox onChange={e => setFiltroStatus({ ...filtroStatus, concluido: e.target.checked })} />} label={<div className={styles.check__concluido}>Concluído</div>} />
