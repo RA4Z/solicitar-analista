@@ -12,7 +12,7 @@ export async function salvarSolicitacao(data: any) {
 }
 
 export async function visualizarSolicitacoes(setSolicitacoes: any, setBackup?: any) {
-    const ref = query(collection(db, "trabalhos"))
+    const ref = query(collection(db, "trabalhos"), orderBy('dataPrevista', 'asc'))
     onSnapshot(ref, (querySnapshot) => {
         const posts: any[] = []
         querySnapshot.forEach((doc) => {
