@@ -8,7 +8,7 @@ interface Props {
     projeto: string,
     status: string,
     imagem?: string,
-    dataProgramado?:string
+    dataProgramado?: string
     onClick?: (_: any) => any
 }
 
@@ -17,7 +17,7 @@ export default function Card(props: Props) {
         <div className={styles.container} onClick={props.onClick} aria-label={props.dataProgramado && `Programado para ${dayjs(props.dataProgramado).format('DD/MM/YYYY')}`}>
             <img src={props.imagem ? props.imagem : UserIMG} alt='Imagem de usuário' />
             <div className={styles.container__right}>
-                <p>{props.nome}</p>
+                <p style={{ fontWeight: 'bold' }}>{props.nome}</p>
                 <p>{props.projeto}</p>
                 <p className={classNames(
                     styles.status,
