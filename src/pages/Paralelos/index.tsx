@@ -55,15 +55,17 @@ export default function Paralelos() {
             </form>
 
             <div className={styles.paralelos}>
-                {projetos.length > 0 && projetos.map((projeto, index) => (
-                    <div className={styles.card} key={index}>
-                        <div className={styles.card__front}>
-                            <h2>{dayjs(projeto.data).format('DD/MM/YYYY')}</h2>
-                            <h3>{dayjs(projeto.horaInicio).format('HH:MM')} - {dayjs(projeto.horaFim).format('HH:MM')} ( {(projeto.tempoMinutos / 60).toFixed(2)}h )</h3>
+                {projetos.length > 0 ? <>
+                    {projetos.map((projeto, index) => (
+                        <div className={styles.card} key={index}>
+                            <div className={styles.card__front}>
+                                <h2>{dayjs(projeto.data).format('DD/MM/YYYY')}</h2>
+                                <h3>{dayjs(projeto.horaInicio).format('HH:MM')} - {dayjs(projeto.horaFim).format('HH:MM')} ( {(projeto.tempoMinutos / 60).toFixed(2)}h )</h3>
+                            </div>
+                            <p>{projeto.analista} - {projeto.ocorrido}</p>
                         </div>
-                        <p>{projeto.analista} - {projeto.ocorrido}</p>
-                    </div>
-                ))}
+                    ))}
+                </> : <h2 style={{ color: 'white', textAlign: 'center' }}>Nenhum projeto paralelo encontrado!</h2>}
             </div>
 
         </div>

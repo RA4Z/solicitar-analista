@@ -104,14 +104,16 @@ export default function Visualizar({ view }: any) {
                 </div>
                 <Divider style={{ background: 'white', width: '100%', marginBottom: 25, marginTop: 20 }} />
             </form>
-            {view === 'cards' ?
-                <CardsView trabalhos={trabalhos} />
-                :
-                <>
-                    {trabalhos.map(trabalho => (
-                        <Lista key={trabalho.id} {...trabalho} onClick={() => navigate(`/Projeto/${trabalho.id}`)} />
-                    ))}
-                </>}
+            {trabalhos.length > 0 ? <>
+                {view === 'cards' ?
+                    <CardsView trabalhos={trabalhos} />
+                    :
+                    <>
+                        {trabalhos.map(trabalho => (
+                            <Lista key={trabalho.id} {...trabalho} onClick={() => navigate(`/Projeto/${trabalho.id}`)} />
+                        ))}
+                    </>}
+            </> : <h2 style={{ color: 'white', textAlign: 'center' }}>Nenhum projeto encontrado!</h2>}
         </div >
     )
 }
